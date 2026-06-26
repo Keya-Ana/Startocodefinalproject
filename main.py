@@ -3,11 +3,15 @@ import requests
 from fastapi import FastAPI, Form
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from google import genai
+from google.genai import types
+import os
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-STARTOCODE_QUESTION_GENERATOR = "https://startocode-ai-api-v1.fly.dev/ask"
+GEMINI_API_KEY = os.getenv("GOOGLE_API_KEY")
+client = genai.Client(api_key=GEMINI_API_KEY)
 
 def build_page(results_html=""):
     file = open("static/index.html")
