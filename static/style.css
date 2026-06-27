@@ -1,5 +1,5 @@
 /* ==========================================================================
-   GLOBAL RESET & PREMIUM LIGHT THEMING
+   HOMEPAGE SETUP - GOLD Q&A TILES
    ========================================================================== */
 * {
     box-sizing: border-box;
@@ -9,19 +9,16 @@
 
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    color: #1e293b;
-    min-height: 100vh;
-    padding: 60px 20px;
-    position: relative;
-
-    /* Premium overlay treatment on your main homepage QA image asset */
-    background: linear-gradient(rgba(241, 245, 249, 0.85), rgba(241, 245, 249, 0.85)), url('/static/background image.jpg');
+    /* Uses your gold Q&A tiles image for the homepage background */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(15, 23, 42, 0.5)), url('/static/background image.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    min-height: 100vh;
+    padding: 60px 20px;
+    position: relative;
 }
 
-/* Base Form Layout Frame */
 .container {
     max-width: 580px;
     margin: 40px auto;
@@ -29,25 +26,22 @@ body {
 }
 
 h1 {
-    font-size: 2.4rem;
+    text-align: left;
+    font-size: 2.2rem;
     font-weight: 800;
-    color: #0f172a;
-    margin-bottom: 28px;
-    text-align: center;
+    color: #ffffff;
     letter-spacing: -0.5px;
+    margin-bottom: 24px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
-/* Frosted Glass Input Window Box */
+/* Sharp Opaque Form Backing */
 form {
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: #8e8e74 !important;
     padding: 36px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow:
-        0 10px 30px -5px rgba(15, 23, 42, 0.04),
-        0 20px 40px -10px rgba(15, 23, 42, 0.03);
+    border-radius: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -55,295 +49,162 @@ form {
 
 label {
     font-weight: 700;
-    color: #334155;
+    color: #fdfcfc;
     font-size: 0.95rem;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     display: block;
 }
 
 input {
     width: 100%;
-    padding: 14px 16px;
-    background: #ffffff;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
+    padding: 14px 18px;
+    background: rgb(147 147 131);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
     font-size: 15px;
-    color: #0f172a;
+    color: #ffffff !important;
     outline: none;
-    transition: all 0.2s ease;
 }
 
-input:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
-}
+input::placeholder { color: #fafaf6; }
+input:focus { border-color: #818cf8; background: #0f172a; }
 
 button[type="submit"], .btn-primary {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    padding: 14px 24px;
+    background: linear-gradient(135deg, #a5a562 0%, #7c7c40 100%);
     color: #ffffff;
     border: none;
     border-radius: 10px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
     transition: all 0.2s ease;
 }
 
 button[type="submit"]:hover, .btn-primary:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3);
 }
 
-.footer {
-    text-align: center;
-    margin-top: 40px;
-    color: #64748b;
-    font-size: 14px;
-    font-weight: 500;
-}
+.footer { text-align: center; margin-top: 40px; color: #ffffff; font-size: 14px; text-shadow: 0 1px 4px black; }
 
 /* ==========================================================================
-   INTERACTIVE QUIZ INTERFACE (HIGH-VISIBILITY DESIGN)
+   QUIZ RESULTS PAGE SETUP - COLORFUL QUESTION CARDS
    ========================================================================== */
 .quiz-body {
-    /* Transitions your layout over to a beautifully illuminated crisp clean canvas background */
-    background: #f8fafc !important;
-    background-image: none !important;
+    /* Uses your colorful question cards image seamlessly tiled for the results view */
+    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(15, 23, 42, 0.25)), url('/static/answer.png') !important;
+    background-size: contain !important;
+    background-repeat: repeat !important;
 }
 
 .results-container {
-    max-width: 720px;
-    margin: 20px auto;
-    padding: 40px 32px;
-    background: #ffffff;
-    border-radius: 24px;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.05);
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-}
-
-/* Seamless Watermark Layer using your custom 'answer.jpg' open book graphic */
-.results-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
+    max-width: 680px;
     width: 100%;
-    height: 100%;
-    background-image: url('/static/answer.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    opacity: 0.04; /* Master Lighting configuration for high visibility */
-    z-index: -1;
-    pointer-events: none;
-}
-
-.results-header {
-    text-align: center;
-    margin-bottom: 36px;
+    margin: 50px auto;
+    padding: 40px 30px;
+    position: relative;
+    background: #0f172a !important;
+    border-radius: 24px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    z-index: 1;
 }
 
 .category-tag {
-    background: #eff6ff;
-    color: #2563eb;
-    padding: 6px 14px;
-    border-radius: 9999px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    background: #e0e7ff; color: #4f46e5; padding: 6px 14px;
+    border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
 }
 
-.results-header h1 {
-    margin-top: 12px;
-    margin-bottom: 4px;
-    color: #0f172a;
-}
+.results-header h1 { text-align: center; color: white; margin-top: 14px; }
+.meta-info { color: #cbd5e1; text-align: center; font-size: 0.95rem; }
+.questions-grid { display: flex; flex-direction: column; gap: 24px; margin: 32px 0; }
 
-.meta-info {
-    color: #64748b;
-    font-size: 0.95rem;
-}
-
-.questions-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    margin-bottom: 32px;
-}
-
-/* 100% Solid Clean Question Display Blocks */
+/* Question Cards */
 .question-card {
-    background: #ffffff !important; /* Forces total opacity */
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 26px;
-    box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.02);
+    background: #ffffff !important; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px;
 }
-
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-}
-
-.q-badge {
-    background: #f1f5f9;
-    color: #475569;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    font-weight: 700;
-}
-
-.status-badge {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: #94a3b8;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.q-badge { background: #f1f5f9; color: #475569; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; }
+.status-badge { font-size: 0.8rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; }
 .status-badge.correct-badge { color: #16a34a; }
 .status-badge.incorrect-badge { color: #dc2626; }
+.question-text { font-size: 1.1rem; color: #0f172a; font-weight: 600; line-height: 1.5; }
 
-.question-text {
-    font-size: 1.15rem;
-    color: #0f172a;
-    font-weight: 600;
-    line-height: 1.5;
-    margin-bottom: 20px;
-}
-
-/* Interactive Option Selection Layout */
-.options-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* Option Buttons - 100% Solid Opaque Backgrounds */
+/* Choice Selectors Layout Grid */
+.options-grid { display: flex; flex-direction: column; gap: 10px; }
 .option-btn {
-    text-align: left;
-    padding: 14px 18px;
-    background: #ffffff !important; /* Fixed: completely opaque */
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    font-size: 0.98rem;
-    color: #334155;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    display: flex;
-    align-items: center;
-    gap: 14px;
+    text-align: left; padding: 12px 16px; background: #ffffff !important;
+    border: 1px solid #e2e8f0; border-radius: 10px; font-size: 0.98rem; color: #334155;
+    cursor: pointer; display: flex; align-items: center; gap: 12px; width: 100%; transition: all 0.1s;
 }
-
-.option-btn:hover:not(.disabled) {
-    background: #f8fafc !important;
-    border-color: #cbd5e1;
-    color: #0f172a;
-}
-
+.option-btn:hover:not(.disabled) { background: #f8fafc !important; }
 .option-letter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    background: #f1f5f9;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    font-weight: 700;
-    color: #64748b;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; width: 28px; height: 28px;
+    background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; font-weight: 700; color: #64748b;
 }
 
-/* Button Evaluation Logic Classes */
-.option-btn.disabled {
-    cursor: not-allowed;
-}
+.option-btn.disabled { cursor: not-allowed; }
+.option-btn.correct { background: #dcfce7 !important; border-color: #22c55e !important; color: #14532d !important; font-weight: 600; }
+.option-btn.correct .option-letter { background: #22c55e !important; color: white !important; }
+.option-btn.incorrect { background: #fee2e2 !important; border-color: #ef4444 !important; color: #7f1d1d !important; }
+.option-btn.incorrect .option-letter { background: #ef4444 !important; color: white !important; }
 
-.option-btn.correct {
-    background: #dcfce7 !important;
-    border-color: #22c55e !important;
-    color: #14532d !important;
-    font-weight: 600;
-}
-.option-btn.correct .option-letter {
-    background: #22c55e !important;
-    color: #ffffff !important;
-    border-color: #22c55e !important;
-}
-
-.option-btn.incorrect {
-    background: #fee2e2 !important;
-    border-color: #ef4444 !important;
-    color: #7f1d1d !important;
-}
-.option-btn.incorrect .option-letter {
-    background: #ef4444 !important;
-    color: #ffffff !important;
-    border-color: #ef4444 !important;
-}
-
-/* Fully Solid Validation Context Response Windows */
-.feedback-box {
-    margin-top: 20px;
-    padding: 18px;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    line-height: 1.5;
-}
+/* Feedback Windows */
+.feedback-box { margin-top: 18px; padding: 16px; border-radius: 10px; font-size: 0.95rem; }
 .feedback-box.hidden { display: none; }
+.correct-feedback { background: #f0fdf4 !important; border-left: 4px solid #22c55e; color: #166534; }
+.incorrect-feedback { background: #fef2f2 !important; border-left: 4px solid #ef4444; color: #991b1b; }
+.feedback-title { font-weight: 700; margin-bottom: 4px; }
 
-.correct-feedback {
-    background: #f0fdf4 !important;
-    border: 1px solid #bbf7d0;
-    border-left: 4px solid #22c55e;
-    color: #166534;
-}
-.incorrect-feedback {
-    background: #fef2f2 !important;
-    border: 1px solid #fecaca;
-    border-left: 4px solid #ef4444;
-    color: #991b1b;
-}
+/* Answer Layout for Printing */
+.answer-box { background: #f8fafc; border-top: 1px dashed #e2e8f0; margin-top: 16px; padding: 16px; border-radius: 8px; }
+.a-label { color: #10b981; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 4px; }
+.print-only-answer { display: none; }
 
-.feedback-title {
-    font-weight: 700;
-    margin-bottom: 6px;
-}
-
-/* Score Panel Control Bar */
+/* ==========================================================================
+   ONE-BUTTON DROPDOWN INTERACTION UI
+   ========================================================================== */
 .action-bar-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 36px;
-    padding-top: 24px;
-    border-top: 1px solid #e2e8f0;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 28px; border-radius: 16px; position: relative;
 }
 
-.btn-secondary {
-    color: #475569;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: color 0.2s;
-}
-.btn-secondary:hover { color: #0f172a; }
+.btn-secondary { color: #cbd5e1; text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+.btn-secondary:hover { color: #ffffff; }
+.score-tracker { font-weight: 700; background: rgba(255, 255, 255, 0.1); padding: 8px 16px; border-radius: 8px; color: #ffffff; }
 
-.score-tracker {
-    font-weight: 700;
-    background: #f1f5f9;
-    padding: 10px 18px;
-    border-radius: 8px;
-    color: #0f172a;
+/* Dropdown Menu Engine Styling */
+.download-dropdown-wrapper { position: relative; display: inline-block; }
+.dropdown-toggle-btn { min-width: 150px; }
+
+.dropdown-menu {
+    display: none; position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%);
+    background: #ffffff; min-width: 160px; border-radius: 10px; overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3); border: 1px solid #e2e8f0; z-index: 50;
 }
+.dropdown-menu a {
+    color: #1e293b; padding: 12px 16px; text-decoration: none; display: block;
+    font-size: 0.9rem; font-weight: 600; transition: background 0.15s; text-align: center;
+}
+.dropdown-menu a:hover { background: #f1f5f9; color: #4f46e5; }
+.dropdown-menu.show { display: block; }
+
+/* ==========================================================================
+   CLEAN COGNITIVE PDF PRINTER DIRECTIVES
+   ========================================================================== */
+@media print {
+    body, .quiz-body { background: white !important; padding: 0; background-image: none !important;}
+    .no-print, .action-bar-bottom, .options-grid { display: none !important; }
+    .results-container { background: none !important; border: none !important; box-shadow: none !important; padding: 0; }
+    .question-card {
+        background: white !important; border: none !important; padding: 20px 0;
+        border-bottom: 1px solid #cbd5e1 !important; page-break-inside: avoid; border-radius: 0;
+    }
+    .status-badge { display: none; }
+    .question-text { font-size: 1.2rem; margin-bottom: 10px; }
+}
+
+body.print-show-answers .print-only-answer { display: block !important; }

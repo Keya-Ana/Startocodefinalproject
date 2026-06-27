@@ -4,11 +4,17 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from google import genai
 from google.genai import types
+import os
+from dotenv import load_dotenv
+
+# This automatically looks for your .env file and loads it
+load_dotenv()
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-GEMINI_API_KEY = "AQ.Ab8RN6J3nzRS0xE4IN5QK3xnYg8_E9aYJ4jJQDFj4TEp_eqKnA"
+# Safe environment configuration look-up
+GEMINI_API_KEY = os.environ.get("GCP_API_KEY")
 client = genai.Client(api_key=GEMINI_API_KEY)
 
 
@@ -16,6 +22,7 @@ def build_page(results_html=""):
     try:
         with open("static/index.html", "r") as file:
             html = file.read()
+        # FIXED: Explicit placeholder hook checks to guarantee clean template composition
         if "" in html:
             html = html.replace("", results_html)
         else:
@@ -80,7 +87,7 @@ def generate(subject: str = Form(), topic: str = Form(), num_questions: int = Fo
         <html lang="en">
         <head>
             <meta charset="UTF-8"><title>Preparing Quiz</title>
-            <link rel="stylesheet" href="/static/style.css?v=master_error">
+            <link rel="stylesheet" href="/static/style.css?v=sharp_v2">
         </head>
         <body class="quiz-body">
             <div class="results-container" style="text-align: center; margin-top: 80px; background: white;">
@@ -98,6 +105,7 @@ def generate(subject: str = Form(), topic: str = Form(), num_questions: int = Fo
         q_text = item.get("question", "").strip()
         opts = item.get("options", {})
         correct = item.get("correct_answer", "").strip().upper()
+        correct_text = opts.get(correct, "").strip()
         explanation = item.get("explanation", "").strip().replace("'", "\\'")
 
         options_markup = ""
@@ -123,6 +131,11 @@ def generate(subject: str = Form(), topic: str = Form(), num_questions: int = Fo
                 <p class="feedback-title"></p>
                 <p class="feedback-text"><strong>Explanation:</strong> {explanation}</p>
             </div>
+
+            <div class="print-only-answer answer-box">
+                <span class="a-label">Correct Answer</span>
+                <p class="print-answer-text">{correct}. {correct_text}</p>
+            </div>
         </div>
         """
 
@@ -133,7 +146,7 @@ def generate(subject: str = Form(), topic: str = Form(), num_questions: int = Fo
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Questions Sheet</title>
-        <link rel="stylesheet" href="/static/style.css?v=master">
+        <link rel="stylesheet" href="/static/style.css?v=sharp_v2">
     </head>
     <body class="quiz-body">
         <div class="results-container">
@@ -147,8 +160,19 @@ def generate(subject: str = Form(), topic: str = Form(), num_questions: int = Fo
                 {questions_html}
             </div>
 
-            <div class="action-bar-bottom">
+            <div class="action-bar-bottom no-print">
                 <a href="/" class="btn-secondary">← Create Another Assessment</a>
+
+                <div class="download-dropdown-wrapper">
+                    <button class="btn-primary dropdown-toggle-btn" onclick="toggleDropdown(event)">
+                        Download PDF ↓
+                    </button>
+                    <div class="dropdown-menu" id="downloadMenu">
+                        <a href="javascript:void(0)" onclick="printQuiz(false)">Questions Only</a>
+                        <a href="javascript:void(0)" onclick="printQuiz(true)">With Answers</a>
+                    </div>
+                </div>
+
                 <div class="score-tracker">Score: <span id="correct-count">0</span> / {num_questions}</div>
             </div>
         </div>
@@ -191,6 +215,27 @@ def generate(subject: str = Form(), topic: str = Form(), num_questions: int = Fo
             }}
 
             feedbackBox.classList.remove('hidden');
+        }}
+
+        function toggleDropdown(event) {{
+            event.stopPropagation();
+            document.getElementById('downloadMenu').classList.toggle('show');
+        }}
+
+        function printQuiz(showAnswers) {{
+            document.getElementById('downloadMenu').classList.remove('show');
+            if (showAnswers) {{
+                document.body.classList.add('print-show-answers');
+            }}
+            window.print();
+
+            setTimeout(() => {{
+                document.body.classList.remove('print-show-answers');
+            }}, 1200);
+        }}
+
+        window.onclick = function() {{
+            document.getElementById('downloadMenu').classList.remove('show');
         }}
         </script>
     </body>
