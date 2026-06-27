@@ -7,6 +7,20 @@
     <link rel="stylesheet" href="/static/style.css?v=sharp_v2">
 </head>
 <body>
+<div class="nav-bar no-print">
+    <a href="#" id="about-link" class="nav-link">ℹ️ About the App</a>
+</div>
+
+<div id="about-modal" class="modal hidden no-print">
+    <div class="modal-content">
+        <h2>About Question Generator</h2>
+        <p>Welcome! This application uses advanced Google Gemini AI to instantly generate custom multiple-choice quizzes tailored to any academic subject or specific topic you want to study.</p>
+        <p>Built as an interactive practice dashboard, it scores your answers in real time, provides instant explanations, and lets you export clean worksheets for printing.</p>
+        <hr>
+        <p class="credits">Created with ❤️ by <strong>Eulalia Antwi-Agyei</strong></p>
+        <button id="close-about-btn" class="btn-primary">Close</button>
+    </div>
+</div>
 <div class="container">
     <h1>Question Generator</h1>
 
@@ -30,5 +44,25 @@
     <p class="footer">Built by Eulalia Antwi-Agyei</p>
 
 </div>
+
+
+
+<script>
+    // Grab our elements
+const aboutLink = document.getElementById('about-link');
+const aboutModal = document.getElementById('about-modal');
+const closeAboutBtn = document.getElementById('close-about-btn');
+
+// Open the pop-up when clicking the link
+aboutLink.addEventListener('click', (e) => {
+    e.preventDefault(); // Prevents the page from jumping
+    aboutModal.classList.remove('hidden');
+});
+
+// Close the pop-up when clicking the button
+closeAboutBtn.addEventListener('click', () => {
+    aboutModal.classList.add('hidden');
+});
+</script>
 </body>
 </html>

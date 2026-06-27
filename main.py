@@ -20,7 +20,7 @@ client = genai.Client(api_key=GEMINI_API_KEY)
 
 def build_page(results_html=""):
     try:
-        with open("static/index.html", "r") as file:
+        with open("static/index.html", "r", encoding="utf-8") as file:
             html = file.read()
         # FIXED: Explicit placeholder hook checks to guarantee clean template composition
         if "" in html:

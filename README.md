@@ -44,6 +44,8 @@ Open your web browser and go to this address: http://localhost:3003
 
 * Smart PDF Download: Click the single "Download PDF" button to open a menu. You can choose to save a paper (Questions Only) for an unrevealed test or (With Answers) for a complete study guide.
 
+* About the App Link: A clean button placed in the top-left corner that opens a pop-up window explaining how the app works and who built it, without leaving or reloading the page.
+
 📂 What's Inside Your Project?
 - main.py: The main "brain" of the app. It talks to the AI and handles the logic.
 
